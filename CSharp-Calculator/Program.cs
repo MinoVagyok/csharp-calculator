@@ -9,18 +9,17 @@ class Program
     {
         Dictionary<int, Action> Menu = new Dictionary<int, Action>()
         {
-            { 1, ActionOperations.Sum },
-            { 2, ActionOperations.Subtract },
-            { 3, ActionOperations.Times },
-            { 4, ActionOperations.Div },
+            { 1, MultiInputOperations.MultiInPutSum },
+            { 3, MultiInputOperations.MultiInPutTimes },
+            { 4, ActionOperations.Div }
+            
         };
         bool flag = true;
         while (flag)
         {
             Console.WriteLine("*** Calculator ***");
             Console.WriteLine("0 - Exit");
-            Console.WriteLine("1 - Sum");
-            Console.WriteLine("2 - Neg");
+            Console.WriteLine("1 - Basic operations (sum, subtract)");
             Console.WriteLine("3 - times");
             Console.WriteLine("4 - div");
             Console.Write("Your choice: ");
@@ -39,7 +38,6 @@ class Program
                 {
                     Console.WriteLine("*** Error: Unkown menu option. ***");
                 }
-
             }
             else
             {
