@@ -10,6 +10,7 @@ class Program
         Dictionary<int, Action> Menu = new Dictionary<int, Action>()
         {
             { 1, MultiInputOperations.MultiInPutSum },
+            { 2, MultiInputOperations.MultiInPutSubtract},
             { 3, MultiInputOperations.MultiInPutTimes },
             { 4, ActionOperations.Div }
             
@@ -20,6 +21,7 @@ class Program
             Console.WriteLine("*** Calculator ***");
             Console.WriteLine("0 - Exit");
             Console.WriteLine("1 - Basic operations (sum, subtract)");
+            Console.WriteLine("2 - Subtraction operation from fixed base");
             Console.WriteLine("3 - times");
             Console.WriteLine("4 - div");
             Console.Write("Your choice: ");
