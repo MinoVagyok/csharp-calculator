@@ -88,7 +88,7 @@ public class MultiInputOperations
         }
     }
     
-    // Wrapper for the MultiInputOperations, so it can be used in the Dictionaries
+    // Wrappers for the MultiInputOperations, so it can be used in the Dictionaries
     public static void MultiInPutSum()
     {
         float result = MultiInputOperations.MultiSum();

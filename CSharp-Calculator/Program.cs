@@ -22,9 +22,11 @@ class Program
             Console.WriteLine("0 - Exit");
             Console.WriteLine("1 - Basic operations (sum, subtract)");
             Console.WriteLine("2 - Subtraction operation from fixed base");
-            Console.WriteLine("3 - times");
+            Console.WriteLine("3 - Multiplication");
             Console.WriteLine("4 - div");
             Console.Write("Your choice: ");
+            
+            ExpressionParser.Parser("12243+31232/1234");
             if (int.TryParse(Console.ReadLine(), out int choice))
             {
                 if (choice == 0)
