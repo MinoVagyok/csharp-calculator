@@ -1,5 +1,6 @@
 ﻿using System;
 using CSharp_Calculator.Logic;
+using CSharp_Calculator.Logic.Error_Handling;
 
 
 class Program
@@ -7,6 +8,7 @@ class Program
     
     static void Main(string[] args)
     {
+       /*
         Dictionary<int, Action> Menu = new Dictionary<int, Action>()
         {
             { 1, MultiInputOperations.MultiInPutSum },
@@ -15,22 +17,19 @@ class Program
             { 4, ActionOperations.Div }
             
         };
+        */
         bool flag = true;
         while (flag)
         {
             
-            List<string> List = ExpressionTokenizer.Tokenize("*+5-7");
-   /*
-            Console.WriteLine("\n ");
-            for (int i = 0; i < Test_List.Count; i++)
-            {
-                Console.WriteLine(Test_List[i]);
-            }
-            */  
-            Console.WriteLine(ExpressionEvaluator.Evaluate(List));
+            
 
             Console.WriteLine("*** Calculator ***");
-            Console.WriteLine("0 - Exit");
+            Console.WriteLine("Please enter the expression you want to Calculate!");
+            List<string> List = ExpressionTokenizer.Tokenizer(Console.ReadLine());
+            Console.WriteLine(ExpressionEvaluator.Evaluate(List));
+
+            /*Console.WriteLine("0 - Exit");
             Console.WriteLine("1 - Basic operations (sum, subtract)");
             Console.WriteLine("2 - Subtraction operation from fixed base");
             Console.WriteLine("3 - Multiplication");
@@ -42,7 +41,7 @@ class Program
                 {
                     ActionOperations.Exit(ref flag);
                 }
-                
+
                 else if (Menu.ContainsKey(choice))
                 {
                     Menu[choice]();
@@ -57,7 +56,7 @@ class Program
                 Console.WriteLine("*** Error: Invalid number format. Please enter integers only. *** ");
                 ActionOperations.Exit(ref flag);
             }
-
+            */
         }
     }
 
