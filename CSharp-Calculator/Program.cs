@@ -18,6 +18,17 @@ class Program
         bool flag = true;
         while (flag)
         {
+            
+            List<string> List = ExpressionTokenizer.Tokenize("*+5-7");
+   /*
+            Console.WriteLine("\n ");
+            for (int i = 0; i < Test_List.Count; i++)
+            {
+                Console.WriteLine(Test_List[i]);
+            }
+            */  
+            Console.WriteLine(ExpressionEvaluator.Evaluate(List));
+
             Console.WriteLine("*** Calculator ***");
             Console.WriteLine("0 - Exit");
             Console.WriteLine("1 - Basic operations (sum, subtract)");
@@ -25,8 +36,6 @@ class Program
             Console.WriteLine("3 - Multiplication");
             Console.WriteLine("4 - div");
             Console.Write("Your choice: ");
-            
-            ExpressionParser.Parser("12243+31232/1234");
             if (int.TryParse(Console.ReadLine(), out int choice))
             {
                 if (choice == 0)
