@@ -1,58 +1,50 @@
-﻿using System.Runtime.InteropServices.JavaScript;
+﻿using System.Globalization;
+using System.Runtime.InteropServices.JavaScript;
 using CSharp_Calculator.Logic.Error_Handling;
+using Token = CSharp_Calculator.Logic.Token_Logic.Token;
+using TokenType = CSharp_Calculator.Logic.Token_Logic.TokenType;
 
 namespace CSharp_Calculator.Logic;
 
 public class ExpressionTokenizer
 {
-    public static List<string> Tokenizer(string expression)
+    public static List<Token> Tokenizer(string expression)
     {
-        List<string> list = new List<string>();
+        List<Token> list = new List<Token>();
         string CurrentNumber = "";
         for (int i = 0; i < expression.Length; i++)
         {
             char Current_Char = expression[i];
-            if (char.IsDigit(Current_Char))
+            if (char.IsDigit(Current_Char) || (Current_Char == '.' && !CurrentNumber.Contains(".")))
             {
                 CurrentNumber += Current_Char.ToString();
- 
 
             }
             else if (Current_Char == '-' || Current_Char == '+' || Current_Char == '*' || Current_Char == '/')
             {
-                if ( !string.IsNullOrEmpty(CurrentNumber) && ErrorHandler.IsValidToken(CurrentNumber))
-                {
-        
-                    list.Add(CurrentNumber);
-                }
-                else
-                {
-                    Console.WriteLine("Error: This isnt a number");
-                }
-
-                if (ErrorHandler.IsValidToken(Current_Char.ToString()))
-                {
-
-                    list.Add(Current_Char.ToString());
-                }
-                else
-                {
-                    Console.WriteLine("Error: This isnt an operator");
-                }
                 
+                if (string.IsNullOrEmpty(CurrentNumber) || !float.TryParse(CurrentNumber, out _))
+                {
+                    Console.WriteLine("Invalid token sequence");
+                    return null;
+                }
+            
+                var tokenNumber = new Token(TokenType.Number, CurrentNumber); 
+                list.Add(tokenNumber);
+                
+                var tokenOperator = new Token(TokenType.Operator, Current_Char.ToString());
+                list.Add(tokenOperator);
+        
                 CurrentNumber = "";
+
             }
         }
 
-        if (!string.IsNullOrEmpty(CurrentNumber) && ErrorHandler.IsValidToken(CurrentNumber))
+        if (!string.IsNullOrEmpty(CurrentNumber) && float.TryParse(CurrentNumber, out _))
         {
-            list.Add(CurrentNumber);
-
-        }
-        else
-        {
-            Console.WriteLine("Error: This isnt a number");
-        }
+            var tokenNumber = new Token(TokenType.Number, CurrentNumber); 
+            list.Add(tokenNumber);
+        }   
         return list;
-    }
+    } 
 }

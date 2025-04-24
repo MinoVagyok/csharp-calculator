@@ -1,14 +1,17 @@
-﻿# 📦 Changelog
+﻿## [v1.1.1] - 2025-04-24
 
-## [v1.0.0] - 2025-04-15
+### ✨ Changed
+- 🧠 Reworked `ExpressionEvaluator` to use `Token`-based logic.
+- ➕ Introduced `switch`-based operation handling (`+`, `-`, `*`, `/`).
+- 🌐 Numbers are now parsed using `float.TryParse` with `InvariantCulture`.
+- 🐞 Token debug print added for development clarity.
+- ✅ Token sequence validation enhanced:
+    - Even indexes must be numbers
+    - Odd indexes must be operators
+    - Last token must be a number
 
-### ✨ Added
-- Basic calculator functionality with operations: Sum, Subtract, Multiply, Divide
-- Modular structure: separated logic into `ActionOperations.cs` and `FuncOperations.cs`
-- Command-line menu loop with user interaction
-- Input validation with `try-catch` to handle invalid numeric input
-- Exit option and clean loop handling with `flag` + `ref` pattern
-
-### 🛠️ Structure
-- Uses dictionaries (`Dictionary<int, Action>`) to avoid switch-case clutter
-- LINQ `.Sum()` used for future extensions (e.g. multi-input operations)
+### 🐛 Fixed
+- 🚫 Prevented malformed decimal numbers like `3.5.5`
+- 🚫 Rejected multiple consecutive operators (e.g. `3+++2`)
+- 🚫 Disallowed expressions ending in operators (e.g. `5+`)
+- 🔐 Division by zero is now properly handled and blocked
