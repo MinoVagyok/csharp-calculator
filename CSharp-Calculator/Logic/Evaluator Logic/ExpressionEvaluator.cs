@@ -20,7 +20,7 @@ public class ExpressionEvaluator
                 Token nextToken = tokens[index+1];
                 if (tokens[index % 2].Type != TokenType.Operator || nextToken.Type != TokenType.Number)
                 {
-                    Console.WriteLine("Invalid token sequence.");
+                    Console.WriteLine("Invalid token sequence. (Evaluator 1)");
                     return 0;
                 }
                 float nextNumber = float.Parse(nextToken.Value);
@@ -54,7 +54,7 @@ public class ExpressionEvaluator
             }
             return currentResult;
         }
-        Console.WriteLine("Error: Invalid token sequence.");
+        Console.WriteLine("Error: Invalid token sequence. (Evaluator 2)");
         return 0;
     }
 }

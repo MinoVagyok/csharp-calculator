@@ -1,5 +1,7 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel.Design;
+using System.Globalization;
 using System.Runtime.InteropServices.JavaScript;
+using System.Security.Cryptography.X509Certificates;
 using CSharp_Calculator.Logic.Error_Handling;
 using Token = CSharp_Calculator.Logic.Token_Logic.Token;
 using TokenType = CSharp_Calculator.Logic.Token_Logic.TokenType;
@@ -18,33 +20,40 @@ public class ExpressionTokenizer
             if (char.IsDigit(Current_Char) || (Current_Char == '.' && !CurrentNumber.Contains(".")))
             {
                 CurrentNumber += Current_Char.ToString();
-
             }
-            else if (Current_Char == '-' || Current_Char == '+' || Current_Char == '*' || Current_Char == '/')
+            else
             {
-                
-                if (string.IsNullOrEmpty(CurrentNumber) || !float.TryParse(CurrentNumber, out _))
+                if (!string.IsNullOrEmpty(CurrentNumber))
                 {
-                    Console.WriteLine("Invalid token sequence");
-                    return null;
+                    var tokenNumber = new Token(TokenType.Number, CurrentNumber);
+                    list.Add(tokenNumber);
+                    CurrentNumber = "";
                 }
-            
-                var tokenNumber = new Token(TokenType.Number, CurrentNumber); 
-                list.Add(tokenNumber);
-                
-                var tokenOperator = new Token(TokenType.Operator, Current_Char.ToString());
-                list.Add(tokenOperator);
-        
-                CurrentNumber = "";
 
+                if (Current_Char == '(')
+                {
+                    list.Add(new Token(TokenType.LeftParenthesis, Current_Char.ToString()));
+                }
+                else if (Current_Char == ')')
+                {
+                    list.Add(new Token(TokenType.RightParenthesis, Current_Char.ToString()));
+                }
+                else if (Current_Char == '+' || Current_Char == '-' || Current_Char == '*' || Current_Char == '/')
+                {
+                    list.Add(new Token(TokenType.Operator, Current_Char.ToString()));
+                }
+                else if (Current_Char != ' ')
+                {
+                    Console.WriteLine("Invalid Token Sequence (Tokenizer 1)" );
+                }
             }
         }
-
         if (!string.IsNullOrEmpty(CurrentNumber) && float.TryParse(CurrentNumber, out _))
         {
-            var tokenNumber = new Token(TokenType.Number, CurrentNumber); 
+            var tokenNumber = new Token(TokenType.Number, CurrentNumber);
             list.Add(tokenNumber);
-        }   
+        }
         return list;
-    } 
+    }
+    
 }

@@ -6,7 +6,8 @@ public class Token_Logic
     {
         Number,
         Operator,
-        Parenthesis
+        LeftParenthesis,
+        RightParenthesis,
     }
 
     public class Token

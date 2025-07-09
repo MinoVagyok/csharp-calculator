@@ -5,7 +5,21 @@ using CSharp_Calculator.Logic.Error_Handling;
 
 class Program
 {
-    
+    static void WriteOut(List<Token_Logic.Token> tokens)
+    {
+        List<string> outputStrings = new List<string>();
+        foreach (var token in tokens)
+        {
+            outputStrings.Add(token.Value);
+        }
+
+        //double result = ExpressionEvaluator.Evaluate(tokens);
+        //outputStrings.Add(result.ToString());
+        
+        string joined = string.Join(", ", outputStrings);
+        Console.WriteLine($"[{joined}]");
+    }
+
     static void Main(string[] args)
     {
         bool flag = true;
@@ -17,7 +31,9 @@ class Program
             List<Token_Logic.Token> list = ExpressionTokenizer.Tokenizer(input);
             if (list != null)
             {
-                Console.WriteLine(ExpressionEvaluator.Evaluate(list));
+                var postfix = ShuntingYard.ConvertToPostFix(list);
+                WriteOut(postfix);
+                //Console.WriteLine(ExpressionEvaluator.Evaluate(list));
             }
             else
             {
