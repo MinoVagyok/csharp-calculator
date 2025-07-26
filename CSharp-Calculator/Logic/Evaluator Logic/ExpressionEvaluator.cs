@@ -8,6 +8,11 @@ namespace CSharp_Calculator.Logic;
 
 public class ExpressionEvaluator
 {
+    
+// Legacy method from the infix-based evaluation phase.
+// This method is no longer used.
+// Current flow: input → Tokenizer → Shunting Yard → EvaluatePostFix,
+// and all validation is now handled within those steps.
     public static float Evaluate(List<Token> tokens)
     {
         if (ErrorHandler.IsValidTokenSequence(tokens))
@@ -56,5 +61,68 @@ public class ExpressionEvaluator
         }
         Console.WriteLine("Error: Invalid token sequence. (Evaluator 2)");
         return 0;
+    }
+
+    public static float EvaluatePostFix(List<Token> postfixTokens)
+    {
+        float solution = 0;
+        Stack<float> operandusStack = new Stack<float>();
+        foreach (Token token in postfixTokens)
+        {
+            if (token.Type == TokenType.Number)
+            {
+                float.TryParse(token.Value, out float operandus);
+                operandusStack.Push(operandus);
+            }
+
+            if (token.Type == TokenType.Operator)
+            {
+                if (operandusStack.Count < 2)
+                {
+                    Console.WriteLine("Error: Too few operandus in stack.(EvaluatePostFix)");
+                    return -1;
+                }
+                
+                var operandRight = operandusStack.Pop();
+                var operandLeft = operandusStack.Pop();
+
+                if (token.Value == "+")
+                {
+                    solution = operandLeft + operandRight;
+                }
+
+                if (token.Value == "-")
+                {
+                    solution = operandLeft - operandRight;
+                }
+
+                if (token.Value == "*")
+                {
+                    solution = operandLeft * operandRight;
+                }
+
+                if (token.Value == "/")
+                {
+                    if (operandRight == 0)
+                    {
+                        Console.WriteLine("Error: Cannot divide by zero.(EvaluatePostFix)");
+                        return -1;
+                    }
+                    solution = operandLeft / operandRight;
+                }
+                
+                operandusStack.Push(solution);
+
+            }
+            
+        }
+        
+        if (operandusStack.Count != 1)
+        {
+            Console.WriteLine("Error: Invalid Posfix expression. (EvaluatePostFix)");
+            return -1;
+        }
+        return operandusStack.Pop();
+        
     }
 }

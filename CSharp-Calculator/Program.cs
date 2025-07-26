@@ -33,6 +33,8 @@ class Program
             {
                 var postfix = ShuntingYard.ConvertToPostFix(list);
                 WriteOut(postfix);
+                var test = ExpressionEvaluator.EvaluatePostFix(postfix);
+                Console.WriteLine($"Test: {test}");
                 //Console.WriteLine(ExpressionEvaluator.Evaluate(list));
             }
             else

@@ -25,9 +25,21 @@ public class ExpressionTokenizer
             {
                 if (!string.IsNullOrEmpty(CurrentNumber))
                 {
-                    var tokenNumber = new Token(TokenType.Number, CurrentNumber);
-                    list.Add(tokenNumber);
+                    if (!float.TryParse(CurrentNumber, out _))
+                    {
+                        Console.WriteLine($"Invalid number format: {CurrentNumber} (Tokenizer 1)");
+                        return null;
+                    }
+                    
+                    list.Add(new Token(TokenType.Number, CurrentNumber));
                     CurrentNumber = "";
+                }
+                
+                if ((Current_Char == '-' || Current_Char == '+') &&
+                    (i == 0 || expression[i - 1] == '('))
+                {
+                    CurrentNumber += Current_Char.ToString();
+                    continue;
                 }
 
                 if (Current_Char == '(')
@@ -44,14 +56,20 @@ public class ExpressionTokenizer
                 }
                 else if (Current_Char != ' ')
                 {
-                    Console.WriteLine("Invalid Token Sequence (Tokenizer 1)" );
+                    Console.WriteLine("Invalid Token Sequence (Tokenizer 2)" );
+                    return null;
                 }
+
             }
         }
-        if (!string.IsNullOrEmpty(CurrentNumber) && float.TryParse(CurrentNumber, out _))
+        if (!string.IsNullOrEmpty(CurrentNumber))
         {
-            var tokenNumber = new Token(TokenType.Number, CurrentNumber);
-            list.Add(tokenNumber);
+            if (!float.TryParse(CurrentNumber, out _))
+            {
+                Console.WriteLine($"Invalid number at end: {CurrentNumber} (Tokenizer 3)");
+                return null;
+            }
+            list.Add(new Token(TokenType.Number, CurrentNumber));
         }
         return list;
     }
