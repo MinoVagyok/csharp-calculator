@@ -1,0 +1,15 @@
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.exe
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.deps.json
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.runtimeconfig.json
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.pdb
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.GeneratedMSBuildEditorConfig.editorconfig
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.AssemblyInfoInputs.cache
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.AssemblyInfo.cs
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.csproj.CoreCompileInputs.cache
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.sourcelink.json
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\refint\CSharp-Calculator.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.pdb
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.genruntimeconfig.cache
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\ref\CSharp-Calculator.dll
