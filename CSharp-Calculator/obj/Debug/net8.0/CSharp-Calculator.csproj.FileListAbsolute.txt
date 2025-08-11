@@ -4,8 +4,6 @@ E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CS
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.dll
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.pdb
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.GeneratedMSBuildEditorConfig.editorconfig
-E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.AssemblyInfoInputs.cache
-E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.AssemblyInfo.cs
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.csproj.CoreCompileInputs.cache
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.sourcelink.json
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.dll
@@ -13,3 +11,7 @@ E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\re
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.pdb
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.genruntimeconfig.cache
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\ref\CSharp-Calculator.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.csproj.AssemblyReference.cache
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\MatrixLibrary.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\MatrixLibrary.pdb
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-C.2C5E2B24.Up2Date

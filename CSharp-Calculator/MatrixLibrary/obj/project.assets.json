@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {
-      "MatrixLibrary/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/MatrixLibrary.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MatrixLibrary.dll": {}
-        }
-      }
-    }
+    "net8.0": {}
   },
-  "libraries": {
-    "MatrixLibrary/1.0.0": {
-      "type": "project",
-      "path": "MatrixLibrary/MatrixLibrary.csproj",
-      "msbuildProject": "MatrixLibrary/MatrixLibrary.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net8.0": [
-      "MatrixLibrary >= 1.0.0"
-    ]
+    "net8.0": []
   },
   "packageFolders": {
     "C:\\Users\\milan\\.nuget\\packages\\": {}
@@ -32,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\CSharp-Calculator.csproj",
-      "projectName": "CSharp-Calculator",
-      "projectPath": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\CSharp-Calculator.csproj",
+      "projectUniqueName": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj",
+      "projectName": "MatrixLibrary",
+      "projectPath": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj",
       "packagesPath": "C:\\Users\\milan\\.nuget\\packages\\",
-      "outputPath": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\obj\\",
+      "outputPath": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\milan\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -50,11 +31,7 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {
-            "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj": {
-              "projectPath": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

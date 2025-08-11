@@ -1,10 +1,11 @@
 ﻿using System;
 using CSharp_Calculator.Logic;
 using CSharp_Calculator.Logic.Error_Handling;
+using MatrixLibrary;
 
 
 class Program
-{
+{ 
     static void WriteOut(List<Token_Logic.Token> tokens)
     {
         List<string> outputStrings = new List<string>();
@@ -12,9 +13,6 @@ class Program
         {
             outputStrings.Add(token.Value);
         }
-
-        //double result = ExpressionEvaluator.Evaluate(tokens);
-        //outputStrings.Add(result.ToString());
         
         string joined = string.Join(", ", outputStrings);
         Console.WriteLine($"[{joined}]");
@@ -22,6 +20,7 @@ class Program
 
     static void Main(string[] args)
     {
+       
         bool flag = true;
         while (flag)
         {
@@ -35,17 +34,16 @@ class Program
                 WriteOut(postfix);
                 var test = ExpressionEvaluator.EvaluatePostFix(postfix);
                 Console.WriteLine($"Test: {test}");
-                //Console.WriteLine(ExpressionEvaluator.Evaluate(list));
             }
             else
             {
                 Console.WriteLine("Invalid expression");
+                flag = false;
             }
-
-
-
         }
-    }
+        
 
+    }
+    
 }
 

@@ -1,11 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <RootNamespace>CSharp_Calculator</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Logic\Matrix Logic\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="MatrixLibrary\MatrixLibrary.csproj" />
+    </ItemGroup>
 
 </Project>

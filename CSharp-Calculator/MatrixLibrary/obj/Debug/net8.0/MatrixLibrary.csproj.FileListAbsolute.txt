@@ -1,0 +1,12 @@
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\bin\Debug\net8.0\MatrixLibrary.deps.json
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\bin\Debug\net8.0\MatrixLibrary.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\bin\Debug\net8.0\MatrixLibrary.pdb
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\MatrixLibrary.GeneratedMSBuildEditorConfig.editorconfig
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\MatrixLibrary.AssemblyInfoInputs.cache
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\MatrixLibrary.AssemblyInfo.cs
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\MatrixLibrary.csproj.CoreCompileInputs.cache
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\MatrixLibrary.sourcelink.json
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\MatrixLibrary.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\refint\MatrixLibrary.dll
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\MatrixLibrary.pdb
+E:\Programozás_projects\csharp-calculator\CSharp-Calculator\MatrixLibrary\obj\Debug\net8.0\ref\MatrixLibrary.dll

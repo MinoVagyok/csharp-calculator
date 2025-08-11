@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Calculator", "CSharp-Calculator.csproj", "{9336F22A-0A87-4BB8-AA41-203214603922}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixLibrary", "MatrixLibrary\MatrixLibrary.csproj", "{E6FC994B-CB24-477C-A82D-474A62021046}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9336F22A-0A87-4BB8-AA41-203214603922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9336F22A-0A87-4BB8-AA41-203214603922}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9336F22A-0A87-4BB8-AA41-203214603922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6FC994B-CB24-477C-A82D-474A62021046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6FC994B-CB24-477C-A82D-474A62021046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6FC994B-CB24-477C-A82D-474A62021046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6FC994B-CB24-477C-A82D-474A62021046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
