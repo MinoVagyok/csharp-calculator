@@ -4,12 +4,14 @@
     {
         public static bool operator ==(Matrix A, Matrix B)
         {
+            if (ReferenceEquals(A, B)) return true;
+            if (A is null || B is null) return false;
             return MatrixOperations.AreEqual(A, B);
         }
 
         public static bool operator !=(Matrix A, Matrix B)
         {
-            return !MatrixOperations.AreEqual(A, B);
+            return !(A == B);
         }
         public override bool Equals(object obj)
         {

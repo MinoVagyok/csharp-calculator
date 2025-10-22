@@ -15,3 +15,20 @@ E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CS
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\MatrixLibrary.dll
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\bin\Debug\net8.0\MatrixLibrary.pdb
 E:\Programozás_projects\csharp-calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-C.2C5E2B24.Up2Date
+E:\Programming Projects\calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.exe
+E:\Programming Projects\calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.deps.json
+E:\Programming Projects\calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.runtimeconfig.json
+E:\Programming Projects\calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.dll
+E:\Programming Projects\calculator\CSharp-Calculator\bin\Debug\net8.0\CSharp-Calculator.pdb
+E:\Programming Projects\calculator\CSharp-Calculator\bin\Debug\net8.0\MatrixLibrary.dll
+E:\Programming Projects\calculator\CSharp-Calculator\bin\Debug\net8.0\MatrixLibrary.pdb
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.csproj.AssemblyReference.cache
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.GeneratedMSBuildEditorConfig.editorconfig
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.csproj.CoreCompileInputs.cache
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.sourcelink.json
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-C.2C5E2B24.Up2Date
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.dll
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\refint\CSharp-Calculator.dll
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.pdb
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\CSharp-Calculator.genruntimeconfig.cache
+E:\Programming Projects\calculator\CSharp-Calculator\obj\Debug\net8.0\ref\CSharp-Calculator.dll

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj",
+      "projectUniqueName": "E:\\Programming Projects\\calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj",
       "projectName": "MatrixLibrary",
-      "projectPath": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj",
+      "projectPath": "E:\\Programming Projects\\calculator\\CSharp-Calculator\\MatrixLibrary\\MatrixLibrary.csproj",
       "packagesPath": "C:\\Users\\milan\\.nuget\\packages\\",
-      "outputPath": "E:\\Programozás_projects\\csharp-calculator\\CSharp-Calculator\\MatrixLibrary\\obj\\",
+      "outputPath": "E:\\Programming Projects\\calculator\\CSharp-Calculator\\MatrixLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\milan\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\milan\\.dotnet\\sdk\\8.0.414/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

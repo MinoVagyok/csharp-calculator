@@ -2,7 +2,8 @@
 
 public class MatrixValidator
 {
-    public static bool AreSameSize(Matrix A, Matrix B) => A.Rows == B.Rows && A.Columns == B.Columns;
+    public static bool AreSameSize(Matrix A, Matrix B) =>
+        !(A is null || B is null) && A.Rows == B.Rows && A.Columns == B.Columns;
     public static bool CanMultiply(Matrix A, Matrix B) => A.Rows == B.Columns;
     
     public static bool IsSquare(Matrix M) => M.Rows == M.Columns;

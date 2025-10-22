@@ -6,8 +6,7 @@ public static class MatrixOperations
     {
         if (!MatrixValidator.AreSameSize(A, B))
         {
-            Console.WriteLine("Error: Matrix is not the same size");
-            return null;
+            throw new InvalidOperationException("Error: Matrix sizes do not match for addition.");
         }
         
         Matrix solution = new Matrix(A.Rows, A.Columns);
@@ -25,8 +24,7 @@ public static class MatrixOperations
     {
         if (!MatrixValidator.CanMultiply(left, right))
         {
-            Console.WriteLine("Error: Matrix cannot be multiplied(Dimensions do not match)");
-            return null;
+            throw new InvalidOperationException("Error: Matrix cannot be multiplied(Dimensions do not match)");
         }
         
         Matrix solution = new Matrix(left.Rows, right.Columns);
@@ -62,8 +60,7 @@ public static class MatrixOperations
     {
         if (!MatrixValidator.AreSameSize(A, B))
         {
-            Console.WriteLine("Error: Matrix is not the same size");
-            return false;
+            throw new InvalidOperationException("Error: Matrix is not the same size");
         }
 
         for (int i = 0; i < A.Rows; i++)
