@@ -1,12 +1,18 @@
 ﻿namespace MatrixLibrary;
+using System;
+
 
 public static class MatrixOperations
 {
+
+
     public static Matrix Add(Matrix A, Matrix B)
     {
-        if (!MatrixValidator.AreSameSize(A, B))
+        if (A is null) throw new ArgumentNullException(nameof(A));
+        if (B is null) throw new ArgumentNullException(nameof(B));
+        if (A.Rows != B.Rows || A.Columns != B.Columns)
         {
-            throw new InvalidOperationException("Error: Matrix sizes do not match for addition.");
+            throw new InvalidOperationException("Matrices must have the same size for addition.");
         }
         
         Matrix solution = new Matrix(A.Rows, A.Columns);
@@ -22,9 +28,11 @@ public static class MatrixOperations
 
     public static Matrix Multiply(Matrix left, Matrix right)
     {
-        if (!MatrixValidator.CanMultiply(left, right))
+        if (left is null) throw new ArgumentNullException(nameof(left));
+        if (right is null) throw new ArgumentNullException(nameof(right));
+        if (left.Columns != right.Rows)
         {
-            throw new InvalidOperationException("Error: Matrix cannot be multiplied(Dimensions do not match)");
+            throw new InvalidOperationException("Incompatible dimensions for multiplication.");
         }
         
         Matrix solution = new Matrix(left.Rows, right.Columns);
@@ -44,6 +52,7 @@ public static class MatrixOperations
 
     public static Matrix Transpose(Matrix A)
     {
+        if (A is null) throw new ArgumentNullException(nameof(A));
         //A 3x4 Matrix becomes a 4x3, so we have to switch the original dimensions
         Matrix solution = new Matrix(A.Columns, A.Rows);
         for (int i = 0; i < A.Rows; i++)
@@ -56,36 +65,32 @@ public static class MatrixOperations
         return solution;
     }
 
-    public static bool AreEqual(Matrix A, Matrix B)
+    public static bool AreEqual(Matrix A, Matrix B, float tolerance = 1e-6f)
     {
-        if (!MatrixValidator.AreSameSize(A, B))
+        if (A is null || B is null) return false;
+        if (A.Rows != B.Rows || A.Columns != B.Columns) return false;
+
+        if (tolerance <= 0f)
         {
-            throw new InvalidOperationException("Error: Matrix is not the same size");
+            for (int i = 0; i < A.Rows; i++)
+            {
+                for (int j = 0; j < A.Columns; j++)
+                {
+                    if (A.Data[i][j] != B.Data[i][j]) return false;
+                }
+            }
+            return true;
         }
 
         for (int i = 0; i < A.Rows; i++)
         {
             for (int j = 0; j < A.Columns; j++)
             {
-                if (A.Data[i][j] != B.Data[i][j])
-                    return false;
+                if (Math.Abs(A.Data[i][j] - B.Data[i][j]) > tolerance) return false;
             }
         }
         return true;
     }
     
-    public static void PrintMatrix(Matrix M)
-    {
-        Console.WriteLine($"Matrix ({M.Rows} x {M.Columns}):");
-        for (int i = 0; i < M.Rows; i++)
-        {
-            Console.Write("| ");
-            for (int j = 0; j < M.Columns; j++)
-            {
-                Console.Write($"{M.Data[i][j],6:0.##} "); // Igazítás és max 2 tizedes
-            }
-            Console.WriteLine("|");
-        }
-        Console.WriteLine(); // Üres sor a végén
-    }
+
 }

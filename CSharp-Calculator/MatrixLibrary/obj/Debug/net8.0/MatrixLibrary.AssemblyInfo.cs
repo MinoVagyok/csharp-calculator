@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MatrixLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+33f4af6226cc6699f6642bf858e7da06f109d324")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94bc9423531a4297e7bb11748a75007f085729d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("MatrixLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MatrixLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

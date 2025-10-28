@@ -6,6 +6,8 @@ namespace CSharp_Calculator.Logic
     {
         public static List<Token_Logic.Token> ConvertToPostFix(List<Token_Logic.Token> infixTokens)
         {
+            if (infixTokens == null || infixTokens.Count == 0)
+                throw new ArgumentException("Infix token list is empty.", nameof(infixTokens));
             List<Token_Logic.Token> output = new List<Token_Logic.Token>();
             Stack<Token_Logic.Token> operators = new Stack<Token_Logic.Token>();
             for (int i = 0; i < infixTokens.Count; i++)
@@ -28,7 +30,7 @@ namespace CSharp_Calculator.Logic
 
                     if (operators.Count == 0)
                     {
-                        throw new Exception("Mismatched parenthesis");
+                        throw new InvalidOperationException("Mismatched parenthesis.");
                     }
 
                     operators.Pop();
@@ -55,7 +57,7 @@ namespace CSharp_Calculator.Logic
                 if (operators.Peek().Type == Token_Logic.TokenType.LeftParenthesis ||
                     operators.Peek().Type == Token_Logic.TokenType.RightParenthesis)
                 {
-                    throw new Exception("Mismatched parentheses at end.");
+                    throw new InvalidOperationException("Mismatched parentheses at end.");
                 }
                 output.Add(operators.Pop());
             }

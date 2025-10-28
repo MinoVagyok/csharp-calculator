@@ -1,6 +1,5 @@
-﻿
-
-namespace MatrixLibrary;
+﻿namespace MatrixLibrary;
+using System.IO;
 using System.Text.Json;
 using System;
 using System.Collections.Generic;
@@ -12,18 +11,15 @@ public static class MatrixFileReader
 
     public static Matrix LoadFromTxt(string inpath)
     {
+        if (string.IsNullOrWhiteSpace(inpath))
+            throw new ArgumentException("Path is empty.", nameof(inpath));
         if (!File.Exists(inpath))
-        {
-            Console.WriteLine("File does not exist");
-            return null;
-        }
+            throw new FileNotFoundException("File does not exist.", inpath);
 
-        string path = inpath;
-        string[] lines = File.ReadAllLines(path);
-        List<List<float>> matrixData = new List<List<float>>();
+        var lines = File.ReadAllLines(inpath);
+        var matrixData = new List<List<float>>();
         int? expectedCols = null;
         int lineNo = 0;
-
 
         foreach (string rawLine in lines)
         {
@@ -33,62 +29,68 @@ public static class MatrixFileReader
             if (line == "" || line.StartsWith("#"))
                 continue;
 
-            var tokens = line.Split(null);
+            var tokens = line.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
 
             if (expectedCols == null)
             {
                 expectedCols = tokens.Length;
+                if (expectedCols == 0)
+                    throw new FormatException($"No columns detected at line {lineNo}.");
             }
-
             else if (tokens.Length != expectedCols)
             {
-                Console.WriteLine($"Error: inconsistent column count at line {lineNo}");
-                return null;
+                throw new FormatException($"Inconsistent column count at line {lineNo}: " +
+                                          $"expected {expectedCols}, got {tokens.Length}.");
             }
 
-            var row = new List<float>();
-            int colNo = 0;
-
-            foreach (string t in tokens)
+            var row = new List<float>(tokens.Length);
+            for (int col = 0; col < tokens.Length; col++)
             {
-                colNo++;
-                if (!float.TryParse(t, NumberStyles.Any, CultureInfo.InvariantCulture, out float value))
-                {
-                    Console.WriteLine($"Error: invalid number '{t}' at line {lineNo}, col {colNo}");
-                    return null;
-                }
+                var token = tokens[col];
+                if (!float.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
+                    throw new FormatException($"Invalid number '{token}' at line {lineNo}, column {col + 1}.");
 
                 row.Add(value);
             }
-
             matrixData.Add(row);
         }
 
         if (matrixData.Count == 0)
         {
-            Console.WriteLine("Error: file contains no data rows");
-            return null;
+            throw new FormatException("File contains no data rows.");
         }
-
         return new Matrix(matrixData);
     }
     public static Matrix LoadFromJson(string path)
     {
+        if (string.IsNullOrWhiteSpace(path))
+            throw new ArgumentException("Path is empty.", nameof(path));
+        
         if (!File.Exists(path))
-        {
-            Console.WriteLine("Error: JSON file does not exist.");
-            return null;
-        }
+            throw new FileNotFoundException("JSON file does not exist.", path);
 
         string json = File.ReadAllText(path);
-        Matrix matrix = JsonSerializer.Deserialize<Matrix>(json);
-        if (matrix == null || matrix.Data == null || matrix.Data.Count == 0 || matrix.Columns == 0)
+        Matrix? matrix = JsonSerializer.Deserialize<Matrix>(json);
+        if (matrix == null)
+            throw new JsonException("JSON could not be deserialized into a Matrix.");
+        if (matrix.Data == null || matrix.Data.Count == 0)
+            throw new FormatException("JSON contains no matrix data (Data is null or empty).");
+        int cols = matrix.Data[0].Count;
+        if (cols == 0)
+            throw new FormatException("JSON matrix has zero columns.");
+        for (int r = 0; r < matrix.Data.Count; r++)
         {
-            Console.WriteLine("Error: JSON file is invalid or contains no usable matrix data.");
-            return null;
-        }
+            var row = matrix.Data[r];
+            if (row == null)
+                throw new FormatException($"JSON matrix row {r + 1} is null.");
+            if (row.Count != cols)
+                throw new FormatException($"JSON matrix is ragged at row {r + 1}: expected {cols}, got {row.Count}.");
+        }           
+        if (matrix.Rows != matrix.Data.Count || matrix.Columns != cols)
+            throw new FormatException("JSON matrix dimension fields (Rows/Columns) do not match the Data payload.");
 
         return matrix;
+        
     }
 
 }

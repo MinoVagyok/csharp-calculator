@@ -1,39 +1,67 @@
-﻿namespace CSharp_Calculator.Logic.Error_Handling;
+﻿using CSharp_Calculator.Logic.UI_Logic;
 
-using Token = CSharp_Calculator.Logic.Token_Logic.Token;
-using TokenType = CSharp_Calculator.Logic.Token_Logic.TokenType;
+using System;
+using System.Collections.Generic;
+using CSharp_Calculator.Logic.UI_Logic;
 
-public static class ErrorHandler
+namespace CSharp_Calculator.Logic.Error_Handling
 {
-    public static bool IsValidTokenSequence(List<Token> tokens)
-    {
-        if (tokens.Count < 3) return false;
 
-        for (int i = 0; i < tokens.Count; i++)
+    public static class ErrorHandler
+    {
+        public static void SafeRun(Action action)
         {
-            var token = tokens[i];
-
-            if (i % 2 == 0) // Every even index should be a number
+            try
             {
-                if (token.Type != TokenType.Number)
-                    return false;
+                action();
             }
-            else // Every odd index should be an operator
+            catch (Exception ex)
             {
-                if (token.Type != TokenType.Operator)
-                    return false;
+                var e = Unwrap(ex);
+                ConsoleUI.Error("Error: " + MapException(e));
             }
-            //Last token should be a number
-            if (tokens[^1].Type != TokenType.Number)
-                return false;
         }
-        return true;
-    }
-    
-    public static bool IsSafeToDivide(float number)
-    {
-        return number != 0;
-    }
+        
+        public static T SafeRun<T>(Func<T> func, T fallback = default)
+        {
+            try
+            {
+                return func();
+            }
+            catch (Exception ex)
+            {
+                var e = Unwrap(ex);
+                ConsoleUI.Error("Error: " + MapException(e));
+                return fallback;
+            }
+        }
+        
+        private static Exception Unwrap(Exception ex)
+        {
+            if (ex is AggregateException agg && agg.InnerExceptions.Count > 0)
+                return Unwrap(agg.InnerExceptions[0]);
 
+            return ex.InnerException ?? ex;
+        }
+        
+        private static string MapException(Exception ex) => ex switch
+        {
+            FileNotFoundException fnf => $"File not found: {fnf.FileName ?? fnf.Message}",
+            DirectoryNotFoundException => "Directory not found.",
+            PathTooLongException => "File path is too long.",
+            UnauthorizedAccessException => "Access denied for this file or directory.",
+            System.Text.Json.JsonException => "Invalid JSON format.",
+            FormatException => "Invalid data/file format.",
+            DivideByZeroException => "Division by zero is not allowed.",
+            InvalidOperationException ioe => ioe.Message, 
+            NotSupportedException nse => nse.Message,     
+            ArgumentException ae => ae.Message,           
+            
+            _ => ex.Message
+        };
+    }
 }
+
+
+
 

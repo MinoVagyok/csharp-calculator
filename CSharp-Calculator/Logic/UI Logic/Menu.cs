@@ -1,161 +1,160 @@
 ﻿namespace CSharp_Calculator.Logic.UI_Logic;
 using MatrixLibrary;
+using System.IO; 
 
-public class Menu
+
+public static class Menu
 {
     public static void EvaluateExpression()
     {
-        Console.WriteLine("Enter expression:");
+        ConsoleUI.Info("Enter expression:");
         var input = Console.ReadLine();
-        try
-        {
-            List<Token_Logic.Token> list = ExpressionTokenizer.Tokenizer(input);
+        if (string.IsNullOrWhiteSpace(input))
+            throw new ArgumentException("Expression is empty.", nameof(input));
+        input = input.Trim();
+
+        List<Token_Logic.Token> list = ExpressionTokenizer.Tokenizer(input);
             var postfix = ShuntingYard.ConvertToPostFix(list);
             var result = ExpressionEvaluator.EvaluatePostFix(postfix);
-            Console.WriteLine($"Result:  {result} ");
-
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}" );
-        }
+            ConsoleUI.Success($"Result: {result}");
     }
-
+    
     public static void LoadMatrixToDictionary(Dictionary<string, Matrix> matrices)
     {
-        Console.WriteLine("Enter your filename (e.g. matrix1.json or matrix2.txt):");
-        string filename = Console.ReadLine();
+        ConsoleUI.Info("Enter your filename (e.g. matrix1.json or matrix2.txt):");
+        string filename = (Console.ReadLine() ?? "").Trim();
+
         if (!File.Exists(filename))
-        {
-            Console.WriteLine("Error: File does not exist: " + filename);
-            return;
-        }
+            throw new FileNotFoundException("File does not exist: " + filename, filename);
+
+        ConsoleUI.Info("Give a name to this matrix (e.g. A, B, input 1, filtered):");
+        string matrixName = (Console.ReadLine() ?? "").Trim();
         
-        Console.WriteLine("Give a name to this matrix (e.g. A, B, input 1, filtered):");
-        string matrixName = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(matrixName))
+            throw new  ArgumentException("Matrix name is empty.", nameof(matrixName));
 
-        Matrix matrix = null;
-        try
+        Matrix matrix;
+        string ext = Path.GetExtension(filename);
+
+        if (ext.Equals(".json", StringComparison.OrdinalIgnoreCase))
         {
-            if (filename.EndsWith(".json"))
-            {
-                matrix = MatrixFileReader.LoadFromJson(filename);
-            }
-            else if (filename.EndsWith(".txt"))
-            {
-                matrix = MatrixFileReader.LoadFromTxt(filename);
-            }
-            else
-            {
-                Console.WriteLine("Error: Not supported file format (e.g. matrix1.json or matrix2.txt):");
-                return;
-            }
-
-            if (matrix != null)
-            {
-                matrices[matrixName] = matrix;
-                Console.WriteLine($"Matrix '{matrixName}' loaded successfully.");
-            }
-
+            matrix = MatrixFileReader.LoadFromJson(filename);
         }
-        catch (Exception ex)
+        else if (ext.Equals(".txt", StringComparison.OrdinalIgnoreCase))
         {
-            Console.WriteLine($"Error while loading matrix: {ex.Message}");
-            
+            matrix = MatrixFileReader.LoadFromTxt(filename);
         }
+        else
+        {
+            throw new NotSupportedException("Unsupported file format. Use .json or .txt.");
+        }
+
+        matrices[matrixName] = matrix;
+        ConsoleUI.Success($"Matrix '{matrixName}' loaded successfully.");
     }
 
     public static void ListMatrixNames(Dictionary<string, Matrix> matrices)
     { 
       if (matrices.Count == 0)
       {
-          Console.WriteLine("No matrices loaded.");
+          ConsoleUI.Warn("No matrices loaded.");
           return;
       }
 
-      Console.WriteLine("Loaded matrices:");
-      foreach (var key in matrices.Keys)
+      ConsoleUI.Info("Loaded matrices:");
+      foreach (var kvp in matrices)
       {
-          var matrix =  matrices[key];
-          Console.WriteLine($" - {key}: ({matrix.Rows} x {matrix.Columns}) \n ");
+          var name = kvp.Key;
+          var m = kvp.Value;
+          ConsoleUI.Success($" - {name}: ({m.Rows} x {m.Columns})");
       }
     }
 
     public static void DisplayMatrix(Dictionary<string, Matrix> matrices)
     {
-        Console.WriteLine("Enter a matrix name to display:");
-        string  matrixName = Console.ReadLine();
-        if (!matrices.ContainsKey(matrixName))
-        {
-            Console.WriteLine($"Matrix '{matrixName}' not found");
-            return;
-        }
-        MatrixOperations.PrintMatrix(matrices[matrixName]);
+        ConsoleUI.Info("Enter a matrix name to display:");
+        var name = (Console.ReadLine() ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Matrix name is empty.", nameof(name));
+        
+        DisplayMatrix_Core(matrices, name);
+    }
+    private static void DisplayMatrix_Core(Dictionary<string, Matrix> matrices, string name)
+    {
+        if (!matrices.TryGetValue(name, out var matrix))
+            throw new KeyNotFoundException($"Matrix '{name}' not found.");
+        ConsoleUI.PrintMatrix(matrix);
     }
     public static void AddTwoMatrices(Dictionary<string, Matrix> matrices)
     {
-        Console.Write("Enter name of Matrix A: ");
-        string nameA = Console.ReadLine();
+        ConsoleUI.Info("Enter name of Matrix A: ");
+        string nameA = (Console.ReadLine() ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(nameA))
+            throw new ArgumentException("Matrix name is empty.", nameof(nameA));
 
-        Console.Write("Enter name of Matrix B: ");
-        string nameB = Console.ReadLine();
+        ConsoleUI.Info("Enter name of Matrix B: ");
+        string nameB = (Console.ReadLine() ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(nameB))
+            throw new ArgumentException("Matrix name is empty.", nameof(nameB));
 
         if (!matrices.TryGetValue(nameA, out Matrix A) || !matrices.TryGetValue(nameB, out Matrix B))
-        {
-            Console.WriteLine("One or both matrix names not found.");
-            return;
-        }
-
-        try
-        {
-            Matrix result = MatrixOperations.Add(A, B);
-            Console.WriteLine("Result of A + B:");
-            MatrixOperations.PrintMatrix(result);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+            throw new KeyNotFoundException($"One or both matrix names not found ('{nameA}', '{nameB}').");
+        
+        AddTwoMatrices_Core(A, B);
+        
     }
+    private static void AddTwoMatrices_Core(Matrix A, Matrix B)
+    {
+        Matrix result = MatrixOperations.Add(A, B);
+        ConsoleUI.Success("Result of A + B:");
+        ConsoleUI.PrintMatrix(result);
+        
+    }
+    
     public static void MultiplyTwoMatrices(Dictionary<string, Matrix> matrices)
     {
-        Console.Write("Enter name of Matrix A (left): ");
-        string nameA = Console.ReadLine();
+        ConsoleUI.Info("Enter name of Matrix A (left): ");
+        string nameA = (Console.ReadLine() ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(nameA))
+            throw new ArgumentException("Matrix name is empty.", nameof(nameA));
 
-        Console.Write("Enter name of Matrix B (right): ");
-        string nameB = Console.ReadLine();
+        ConsoleUI.Info("Enter name of Matrix B (right): ");
+        string nameB = (Console.ReadLine() ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(nameB))
+            throw new ArgumentException("Matrix name is empty.", nameof(nameB));
 
         if (!matrices.TryGetValue(nameA, out Matrix A) || !matrices.TryGetValue(nameB, out Matrix B))
-        {
-            Console.WriteLine("One or both matrix names not found.");
-            return;
-        }
-
-        try
-        {
-            Matrix result = MatrixOperations.Multiply(A, B);
-            Console.WriteLine("Result of A * B:");
-            MatrixOperations.PrintMatrix(result);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+            throw new KeyNotFoundException($"One or both matrix names not found ('{nameA}', '{nameB}').");
+        
+        MultiplyTwoMatrices_Core(A, B);
     }
+    
+    private static void MultiplyTwoMatrices_Core(Matrix A, Matrix B)
+    {
+        Matrix result = MatrixOperations.Multiply(A, B);
+        ConsoleUI.Success("Result of A * B:");
+        ConsoleUI.PrintMatrix(result);
+    }
+    
     public static void TransposeMatrix(Dictionary<string, Matrix> matrices)
     {
-        Console.Write("Enter name of matrix to transpose: ");
-        string name = Console.ReadLine();
+        ConsoleUI.Info("Enter name of matrix to transpose: ");
+        string name = (Console.ReadLine() ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Matrix name is empty.", nameof(name));
+        
+        if (!matrices.TryGetValue(name, out Matrix matrix))
+            throw new KeyNotFoundException($"Matrix '{name}' not found.");
 
-        if (!matrices.TryGetValue(name, out Matrix M))
-        {
-            Console.WriteLine("Matrix not found.");
-            return;
-        }
-
-        Matrix result = MatrixOperations.Transpose(M);
-        Console.WriteLine("Transposed matrix:");
-        MatrixOperations.PrintMatrix(result);
+        TransposeMatrix_Core(matrix);
+        
+    }
+    
+   private static void TransposeMatrix_Core(Matrix matrix)
+    {
+        var result = MatrixOperations.Transpose(matrix);
+        ConsoleUI.Success("Transposed matrix:");
+        ConsoleUI.PrintMatrix(result);
     }
     
 }
